@@ -17,7 +17,7 @@ Our `sample.id` is a numeric vector where it is a sequence of numbers from 5 to 
 - *This step is optional. For future code below, just replace `data` with `data.sample`*
 
 ### 3. Filter out Bots
- We want to filter out bots becuase we are only interested in reddit comments that are made by real people. In addition, bot posts are very redundant and can interfere with our analysis. [Here](https://www.reddit.com/r/autowikibot/wiki/redditbots) is a list of some bots on reddit. However, this list is dated and does not include many bots that are still found in our data. I manually went through the data and created [reddit_bot_names.csv](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/reddit_bot_names.csv) , a new appended list which includes many of these bots that were missed. To filter them out:
+ We want to filter out bots becuase we are only interested in reddit comments that are made by real people. In addition, bot posts are very redundant and can interfere with our analysis. [Here](https://www.reddit.com/r/autowikibot/wiki/redditbots) is a list of some bots on reddit. However, this list is dated and does not include many bots that are still found in our data. I manually went through the data and created [reddit_bot_names.csv](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/reddit_bot_names.csv) , a new appended list which includes many of these bots that were missed. To filter them out:
 ```R
 # import csv of bot usernames
 library(readr)
@@ -47,7 +47,7 @@ data <- data[!na.rows,]
 sapply(data, function(x) sum(is.na(x)))
 ```
 
-### 4. Filter Text Data
+### 4. Clean Text Data
 The comment data contains things like urls, references to other subreddits, other users, and raw comment text that is used to format comments on the website. To get rid of all of this:
 ```R
 # filter out "http|https|www" links
@@ -78,7 +78,7 @@ data$body <- gsub("[^[:alnum:][:blank:]?.!,'_-]", "", data$body)
 Some of the reddit comments are in languages other than english. Because of this, we may want to filter them out as our sentiment classifier won't be able to work on them. There are a few different ways of doing this, the first of which you can do in R below. There are more methods available in the next section.
 
 ##### > method 1: filter via subreddit
-First, you will need to create a csv of non-english subreddits to filter out. I have manually created one called [nonenglish_subreddits.csv](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/nonenglish_subreddits.csv) which you can use. How we filter out these subreddits is similar to how we filtered out the bots via their username above. To do so:
+First, you will need to create a csv of non-english subreddits to filter out. I have manually created one called [nonenglish_subreddits.csv](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/nonenglish_subreddits.csv) which you can use. How we filter out these subreddits is similar to how we filtered out the bots via their username above. To do so:
 ```R
 # import packages
 library(readr)
