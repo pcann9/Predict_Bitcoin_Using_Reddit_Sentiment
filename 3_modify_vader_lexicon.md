@@ -10,17 +10,17 @@ To best meet all of these needs, I chose [VADER](https://github.com/cjhutto/vade
 You can download VADER from its github repository [here](https://github.com/cjhutto/vaderSentiment), or by conda/pip.
 
 ### 2. Get VADER's Lexicon Text file
-While VADER does have a comprehensive lexicon, we may want to add sentiment words that are specific to our domain. In order to do so, go to the file location where python is downloaded to and go `Python_File_Location>Lib>site-packages>vaderSentiment`. This is the location of the source files of this package. You will notice that there is a text file called "vader_lexicon.txt". This is the location of the VADER lexicon with all of the sentiment words as well as their respective weight. **COPY** and paste this file to your R working_directory. You can also download the [vader lexicon text file here](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/vader_lexicon(real).txt). 
+While VADER does have a comprehensive lexicon, we may want to add sentiment words that are specific to our domain. In order to do so, go to the file location where python is downloaded to and go `Python_File_Location>Lib>site-packages>vaderSentiment`. This is the location of the source files of this package. You will notice that there is a text file called "vader_lexicon.txt". This is the location of the VADER lexicon with all of the sentiment words as well as their respective weight. **COPY** and paste this file to your R working_directory. You can also download the [vader lexicon text file here](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/vader_lexicon(real).txt). 
 
 ### 3. Get Domain Specific Lexicon
-While you could make sentiment dictionaries yourself, there are many resources online that have already created them for you. In our context, we are interested in financial sentiment. [Here](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary) you can find the Loughran-McDonald financial sentiment dictionary. Using this resource, I created a formatted excel file that compiled this financial sentiment lexicon that I named the [Loughran-McDonald Master Dictionary.xlsx](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/Loughran-McDonald%20Master%20Dictionary.xlsx) which you can download.
+While you could make sentiment dictionaries yourself, there are many resources online that have already created them for you. In our context, we are interested in financial sentiment. [Here](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary) you can find the Loughran-McDonald financial sentiment dictionary. Using this resource, I created a formatted excel file that compiled this financial sentiment lexicon that I named the [Loughran-McDonald Master Dictionary.xlsx](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/Loughran-McDonald%20Master%20Dictionary.xlsx) which you can download.
 
-Using this resource, I created a csv called [additional_sentiment.csv](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/additional_sentiment.csv) with a column for positive and negative words in the Loughran-McDonald dictionary that I edited using my discretion. To this csv, I also added domain specific sentiment words that represent the bitcoin community on reddit.
+Using this resource, I created a csv called [additional_sentiment.csv](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/additional_sentiment.csv) with a column for positive and negative words in the Loughran-McDonald dictionary that I edited using my discretion. To this csv, I also added domain specific sentiment words that represent the bitcoin community on reddit.
 
 If you create your own additional sentiment dictionary, be weary of duplicate words in your dictionary. A useful tool to help with this is conditional formatting in excel which is why I recommend you first create/edit/modify it in excel and then export it to a format like CSV.
 
 ### 4. Combine Vader and Loughran-McDonald Lexicon
-In this step, you are going to add [additional_sentiment.csv](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/additional_sentiment.csv) to the [vader lexicon text file here](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/vader_lexicon(real).txt). To do so:
+In this step, you are going to add [additional_sentiment.csv](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/additional_sentiment.csv) to the [vader lexicon text file here](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/vader_lexicon(real).txt). To do so:
 
 ```R
 # import VADER lexicon txt file
@@ -85,7 +85,7 @@ darth_vader <- rbind(vader, additional_sentiment)
 write.table(darth_vader, file = "vader_lexicon.txt", row.names = FALSE, col.names = FALSE, quote = FALSE, sep = "\t", fileEncoding = "UTF-8")
 ```
 
-The new VADER lexicon that I created is available [here](https://github.com/pcann9/reddit-bitcoin-prediction/blob/master/resources/vader_lexicon_fake.txt) for download.
+The new VADER lexicon that I created is available [here](https://github.com/pcann9/Predict_Bitcoin_Using_Reddit_Sentiment/blob/master/resources/vader_lexicon_fake.txt) for download.
 
 ### 5. Replace VADER Lexicon with our New Lexicon
 Go to the same file location that we went to here `Python_File_Location>Lib>site-packages>vaderSentiment` and replace our newly created lexicon with the old one. They will have the same name so make sure not to get them mixed up. 
